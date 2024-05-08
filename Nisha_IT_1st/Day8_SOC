@@ -1,0 +1,29 @@
+int* prefix_products = (int*)malloc(numsSize * sizeof(int));
+    int* suffix_products = (int*)malloc(numsSize * sizeof(int));
+    int* answer = (int*)malloc(numsSize * sizeof(int));
+
+    // Initialize prefix and suffix products arrays
+    prefix_products[0] = 1;
+    suffix_products[numsSize - 1] = 1;
+
+    // Calculate prefix products
+    for (int i = 1; i < numsSize; i++) {
+        prefix_products[i] = prefix_products[i - 1] * nums[i - 1];
+    }
+
+    // Calculate suffix products
+    for (int i = numsSize - 2; i >= 0; i--) {
+        suffix_products[i] = suffix_products[i + 1] * nums[i + 1];
+    }
+
+    // Calculate the final answer array
+    for (int i = 0; i < numsSize; i++) {
+        answer[i] = prefix_products[i] * suffix_products[i];
+    }
+
+    // Set returnSize and free memory
+    *returnSize = numsSize;
+    free(prefix_products);
+    free(suffix_products);
+
+    return answer;
