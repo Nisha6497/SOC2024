@@ -1,0 +1,21 @@
+bool isValid(string s) {
+    stack<char> stk;
+    unordered_map<char, char> mappings = {
+        {'(', ')'},
+        {'{', '}'},
+        {'[', ']'}
+    };
+
+    for (char c : s) {
+        if (mappings.find(c) != mappings.end()) { // If c is an opening bracket
+            stk.push(c);
+        } else { // If c is a closing bracket
+            if (stk.empty() || mappings[stk.top()] != c) {
+                return false; // Mismatch or stack is empty
+            }
+            stk.pop(); // Pop matching opening bracket from stack
+        }
+    }
+
+    return stk.empty(); // Check if stack is empty
+}
