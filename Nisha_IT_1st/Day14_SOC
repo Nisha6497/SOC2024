@@ -1,0 +1,29 @@
+def search(self, pat, txt):
+        if len(pat) > len(txt):
+            return 0
+
+        pat_count = [0] * 26
+        txt_count = [0] * 26
+        count = 0
+
+        # Initialize counts for pattern and first window of text
+        for i in range(len(pat)):
+            pat_count[ord(pat[i]) - ord('a')] += 1
+            txt_count[ord(txt[i]) - ord('a')] += 1
+
+        # Compare counts of current window of text with pattern counts
+        if pat_count == txt_count:
+            count += 1
+
+        # Slide the window one character at a time
+        for i in range(len(pat), len(txt)):
+            # Remove the leftmost character from the previous window
+            txt_count[ord(txt[i - len(pat)]) - ord('a')] -= 1
+            # Add the new character to the current window
+            txt_count[ord(txt[i]) - ord('a')] += 1
+
+            # Compare counts of current window of text with pattern counts
+            if pat_count == txt_count:
+                count += 1
+
+        return count
