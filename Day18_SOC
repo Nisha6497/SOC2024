@@ -1,0 +1,59 @@
+class Solution:    
+
+    #Function to find the minimum number of platforms required at the
+
+    #railway station such that no train waits.
+
+    def minimumPlatform(self,n,arr,dep):
+
+        arr.sort()
+
+        dep.sort()
+
+        
+
+        platforms_needed = 1
+
+        max_platforms = 1
+
+        i = 1
+
+        j = 0
+
+        
+
+        # Loop through both arrays to find the minimum number of platforms needed
+
+        while i < n and j < n:
+
+            # If the arrival time is less than or equal to the departure time,
+
+            # increment the platforms_needed and move the arrival pointer
+
+            if arr[i] <= dep[j]:
+
+                platforms_needed += 1
+
+                i += 1
+
+            # If the arrival time is greater than the departure time,
+
+            # decrement the platforms_needed and move the departure pointer
+
+            elif arr[i] > dep[j]:
+
+                platforms_needed -= 1
+
+                j += 1
+
+            
+
+            # Keep track of the maximum platforms needed at any time
+
+            max_platforms = max(max_platforms, platforms_needed)
+
+        
+
+        # Return the maximum number of platforms needed
+
+        return max_platforms
