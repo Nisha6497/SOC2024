@@ -1,0 +1,34 @@
+class Solution(object):
+    def maximumHappinessSum(self, happiness, k):
+        happiness.sort()
+
+        n = len(happiness)
+
+        ans = happiness[-1]
+
+        k -= 1
+
+        i = n - 2
+
+        cnt = 1
+
+        while k != 0 and i >= 0:
+
+            x = happiness[i] - cnt
+
+            if x <= 0:
+
+                break
+
+            else:
+
+                ans += x
+
+            i -= 1
+
+            k -= 1
+
+            cnt += 1
+
+        return ans
+        
