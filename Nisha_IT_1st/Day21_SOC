@@ -1,0 +1,29 @@
+class Solution:
+    
+    #Function to find the maximum profit and the number of jobs done.
+    def JobScheduling(self,Jobs,n):
+        Jobs.sort(key=lambda x: x.profit, reverse=True)
+        
+        # Find maximum deadline.
+        max_deadline = max(job.deadline for job in Jobs)
+        
+        # Initialize result array to store scheduled jobs.
+        result = [0] * (max_deadline + 1)
+        
+        total_profit = 0
+        total_jobs = 0
+        
+        # Iterate through each job.
+        for job in Jobs:
+            # Find the nearest available slot.
+            for i in range(job.deadline, 0, -1):
+                if result[i] == 0:
+                    # Schedule job at this slot.
+                    result[i] = job.id
+                    total_profit += job.profit
+                    total_jobs += 1
+                    break
+        
+        return [total_jobs, total_profit]
+
+      
