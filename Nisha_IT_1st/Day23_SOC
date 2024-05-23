@@ -1,0 +1,28 @@
+class Solution(object):
+    def divide(self, dividend, divisor):
+        if dividend == 0:
+            return 0
+
+        INT_MIN, INT_MAX = -2**31, 2**31 - 1
+        
+        sign = (dividend > 0) == (divisor > 0)
+        dividend, divisor = abs(dividend), abs(divisor)
+        
+        quotient = 0
+        while dividend >= divisor:
+            temp_divisor, temp_quotient = divisor, 1
+            while dividend >= (temp_divisor << 1):
+                temp_divisor <<= 1
+                temp_quotient <<= 1
+            dividend -= temp_divisor
+            quotient += temp_quotient
+        
+        if not sign:
+            quotient = -quotient
+        
+        if quotient > INT_MAX:
+            return INT_MAX
+        elif quotient < INT_MIN:
+            return INT_MIN
+        else:
+            return quotient
