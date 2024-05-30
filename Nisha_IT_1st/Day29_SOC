@@ -1,0 +1,17 @@
+class Solution:
+    def canReach(self, A, N):
+        max_reachable = 0
+        
+        for i in range(N):
+            # If the current index is beyond the maximum reachable index, return 0
+            if i > max_reachable:
+                return 0
+            
+            # Update the maximum reachable index
+            max_reachable = max(max_reachable, i + A[i])
+            
+            # If the maximum reachable index is greater than or equal to the last index, return 1
+            if max_reachable >= N - 1:
+                return 1
+        
+        return 0
