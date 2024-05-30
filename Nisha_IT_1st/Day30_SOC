@@ -1,0 +1,78 @@
+class Solution(object):
+    def fourSum(self, nums, target):
+        nums.sort()  # Sort the array to simplify the process
+
+        
+
+        quadruplets = []
+
+        n = len(nums)
+
+        
+
+        for i in range(n - 3):  # Loop through the array, leaving space for the other pointers
+
+            # Skip duplicate values
+
+            if i > 0 and nums[i] == nums[i - 1]:
+
+                continue
+
+            
+
+            for j in range(i + 1, n - 2):  # Start the second pointer after the first one
+
+                # Skip duplicate values
+
+                if j > i + 1 and nums[j] == nums[j - 1]:
+
+                    continue
+
+                
+
+                left = j + 1  # Initialize the third pointer
+
+                right = n - 1  # Initialize the fourth pointer
+
+                
+
+                while left < right:  # Two-pointer technique
+
+                    current_sum = nums[i] + nums[j] + nums[left] + nums[right]
+
+                    
+
+                    if current_sum == target:
+
+                        quadruplets.append([nums[i], nums[j], nums[left], nums[right]])
+
+                        
+
+                        # Skip duplicate values
+
+                        while left < right and nums[left] == nums[left + 1]:
+
+                            left += 1
+
+                        while left < right and nums[right] == nums[right - 1]:
+
+                            right -= 1
+
+                        
+
+                        left += 1
+
+                        right -= 1
+
+                    elif current_sum < target:
+
+                        left += 1
+
+                    else:
+
+                        right -= 1
+
+        
+
+        return quadruplets
+        ""
